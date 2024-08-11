@@ -563,105 +563,6 @@ $('.closeMenu').click(() => {
   closeMenu()
 });
 
-// MONEY HUD
-
-const moneyHud = Vue.createApp({
-  data() {
-    return {
-      cash: 0,
-      bank: 0,
-      amount: 0,
-      plus: false,
-      minus: false,
-      showCash: false,
-      showBank: false,
-      showUpdate: false,
-    };
-  },
-  destroyed() {
-    window.removeEventListener("message", this.listener);
-  },
-  mounted() {
-    this.listener = window.addEventListener("message", (event) => {
-      switch (event.data.action) {
-        case "showconstant":
-          this.showConstant(event.data);
-          break;
-        case "updatemoney":
-          this.update(event.data);
-          break;
-        case "show":
-          this.showAccounts(event.data);
-          break;
-      }
-    });
-  },
-  methods: {
-    // CONFIGURE YOUR CURRENCY HERE
-    // https://www.w3schools.com/tags/ref_language_codes.asp LANGUAGE CODES
-    // https://www.w3schools.com/tags/ref_country_codes.asp COUNTRY CODES
-    formatMoney(value) {
-      const formatter = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 0,
-      });
-      return formatter.format(value);
-    },
-    showConstant(data) {
-      this.showCash = true;
-      this.showBank = true;
-      this.cash = data.cash;
-      this.bank = data.bank;
-    },
-    update(data) {
-      this.showUpdate = true;
-      this.amount = data.amount;
-      this.bank = data.bank;
-      this.cash = data.cash;
-      this.minus = data.minus;
-      this.plus = data.plus;
-      if (data.type === "cash") {
-        if (data.minus) {
-          this.showCash = true;
-          this.minus = true;
-          setTimeout(() => (this.showUpdate = false), 1000);
-          setTimeout(() => (this.showCash = false), 2000);
-        } else {
-          this.showCash = true;
-          this.plus = true;
-          setTimeout(() => (this.showUpdate = false), 1000);
-          setTimeout(() => (this.showCash = false), 2000);
-        }
-      }
-      if (data.type === "bank") {
-        if (data.minus) {
-          this.showBank = true;
-          this.minus = true;
-          setTimeout(() => (this.showUpdate = false), 1000);
-          setTimeout(() => (this.showBank = false), 2000);
-        } else {
-          this.showBank = true;
-          this.plus = true;
-          setTimeout(() => (this.showUpdate = false), 1000);
-          setTimeout(() => (this.showBank = false), 2000);
-        }
-      }
-    },
-    showAccounts(data) {
-      if (data.type === "cash" && !this.showCash) {
-        this.showCash = true;
-        this.cash = data.cash;
-        setTimeout(() => (this.showCash = false), 3500);
-      } else if (data.type === "bank" && !this.showBank) {
-        this.showBank = true;
-        this.bank = data.bank;
-        setTimeout(() => (this.showBank = false), 3500);
-      }
-    },
-  },
-}).mount("#money-container");
-
 // PLAYER HUD
 
 const playerHud = {
@@ -693,6 +594,8 @@ const playerHud = {
       armed: 0,
       speed: 0,
       engine: 0,
+      gear: 0,
+      rpm: 0,
       cinematic: 0,
       dev: 0,
       show: false,
@@ -716,9 +619,14 @@ const playerHud = {
       nosColor: "",
       engineColor: "",
       armorColor: "",
+      stressColor: "",
       hungerColor: "",
       healthColor: "",
       thirstColor: "",
+      oxygenColor: "",
+      armedColor: "",
+      parachuteColor: "",
+      devColor: "",
     };
   },
   
@@ -753,6 +661,8 @@ const playerHud = {
       this.nitroActive = data.nitroActive;
       this.harness = data.harness;
       this.speed = data.speed;
+      this.gear = data.gear;
+      this.rpm = data.rpm;
       this.armed = data.armed;
       this.parachute = data.parachute;
       this.hp = data.hp*5;
@@ -951,13 +861,12 @@ const vehHud = {
       altitudegauge: 75,
       fuel: 0,
       speed: 0,
+      gear: 0,
+      rpm: 0,
       seatbelt: 0,
-      showSquareB: 0,
       show: false,
       showAltitude: true,
       showSeatbelt: true,
-      showSquare: false,
-      showCircle: false,
       seatbeltColor: "",
     };
   },
@@ -976,12 +885,12 @@ const vehHud = {
     vehicleHud(data) {
       this.show = data.show;
       this.speed = data.speed;
+      this.gear = data.gear;
+      this.rpm = data.rpm;
       this.altitude = data.altitude;
       this.fuel = (data.fuel * 0.71);
       this.showSeatbelt = data.showSeatbelt;
       this.showAltitude = data.showAltitude;
-      this.showSquareB = data.showSquareB;
-      this.showCircleB = data.showCircleB;
       if (data.seatbelt === true) {
         this.seatbelt = 1;
         this.seatbeltColor = "transparent";
@@ -1005,16 +914,6 @@ const vehHud = {
         this.fuelColor = "#dd6e14";
       } else {
         this.fuelColor = "#FFFFFF";
-      }
-      if (data.showSquareB === true) {
-        this.showSquare = true;
-      } else {
-        this.showSquare = false;
-      }
-      if (data.showCircleB === true) {
-        this.showCircle = true;
-      } else {
-        this.showCircle = false;
       }
       if (data.isPaused === 1) {
         this.show = false;

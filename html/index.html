@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="responsive.css"/>
         <link href="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.prod.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.umd.prod.js" defer></script>
@@ -17,40 +17,138 @@
                 <div class="street2">{{street2}}</div>
                 <div class="street1">{{street1}}</div>
             </div>
+            <div class="backgroundContainer" v-show="show"></div>
             <div class="baseplate" v-show="show">
-                <div v-if="showPointer" class="pointer">˅</div>
+                <div v-if="showPointer" class="pointer"><i class="fa-solid fa-location-pin"></i></div>
                 <div v-if="showDegrees" class="degrees"></div>
-                    <svg class="bezel">
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="-90"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="9" x="-45"/>
-                        <rect width="4.5" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="0"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="9" x="45"/>
-                        <rect width="4.5" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="90"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="9" x="135"/>
-                        <rect width="4.5" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="180"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="9" x="225"/>
-                        <rect width="4.5" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="270"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="9" x="315"/>
-                        <rect width="4.5" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="360"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="9" x="405"/>
-                        <rect width="3" stroke="black" fill="white" stroke-width="0.5" stroke-opacity="0.6" v-if="showCompass" height="20" x="450"/>
-                    </svg>
-            
-                    <svg class="bearing">
-                        <text v-if="showCompass" x="0" y="1.5" dominant-baseline="middle" text-anchor="middle" fill= "yellow">N</text>
-                        <text v-if="showCompass" x="360" y="1.5" dominant-baseline="middle" text-anchor="middle" fill= "yellow">N</text>
-                        <text style="font-size: 1.4vh!important; font-weight: 800!important;" v-if="showCompass" x="315" y="-11" dominant-baseline="middle" text-anchor="middle" fill="white">NW</text>
-                        <text style="font-size: 1.4vh!important; font-weight: 800!important;" v-if="showCompass" x="-45" y="-11" dominant-baseline="middle" text-anchor="middle" fill="white">NW</text>
-                        <text style="font-size: 1.4vh!important; font-weight: 800!important;" v-if="showCompass" x="45" y="-11" dominant-baseline="middle" text-anchor="middle" fill="white">NE</text>
-                        <text style="font-size: 1.4vh!important; font-weight: 800!important;" v-if="showCompass" x="405" y="-11" dominant-baseline="middle" text-anchor="middle" fill="white">NE</text>
-                        <text v-if="showCompass" x="90" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="white">E</text>
-                        <text style="font-size: 1.4vh!important; font-weight: 800!important;" v-if="showCompass" x="135" y="-11" dominant-baseline="middle" text-anchor="middle" fill="white">SE</text>
-                        <text v-if="showCompass" x="180" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="white">S</text>
-                        <text style="font-size: 1.4vh!important; font-weight: 800!important;" v-if="showCompass" x="225" y="-11" dominant-baseline="middle" text-anchor="middle" fill="white">SW</text>
-                        <text v-if="showCompass" x="270" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="white">W</text>
-                    </svg>
-                </div>
+                <svg class="bezel">
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="-90" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-85" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-80" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-75" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-70" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-65" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-60" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-55" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-50" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="-45" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-40" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-35" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-30" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-25" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-20" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-15" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-10" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="-5" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="0" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="5" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="10" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="15" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="20" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="25" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="30" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="35" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="40" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="45" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="50" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="55" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="60" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="65" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="70" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="75" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="80" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="85" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="90" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="95" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="100" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="105" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="110" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="115" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="120" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="125" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="130" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="135" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="140" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="145" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="150" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="155" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="160" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="165" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="170" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="175" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="180" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="185" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="190" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="195" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="200" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="205" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="210" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="215" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="220" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="225" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="230" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="235" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="240" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="245" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="250" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="255" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="260" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="265" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="270" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="275" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="280" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="285" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="290" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="295" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="300" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="305" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="310" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="315" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="320" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="325" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="330" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="335" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="340" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="345" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="350" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="355" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="360" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="365" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="370" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="375" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="380" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="385" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="390" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="395" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="400" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="405" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="410" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="415" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="420" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="425" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="430" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="435" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="440" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="3" x="445" />
+                    <rect width="0.3" stroke="#F8F9FA" fill="#F1F3F5" stroke-width="0.1" stroke-opacity="0.4" v-if="showCompass" height="6" x="450" />          
+                </svg>
+                <svg class="bearing">
+                    <text v-if="showCompass" x="-90" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">B</text>
+                    <text v-if="showCompass" x="-45" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">BL</text>
+                    <text v-if="showCompass" x="0"   y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">U</text>
+                    <text v-if="showCompass" x="45"  y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">TL</text>
+                    <text v-if="showCompass" x="90"  y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">T</text>
+                    <text v-if="showCompass" x="135" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">TG</text>
+                    <text v-if="showCompass" x="180" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">S</text>
+                    <text v-if="showCompass" x="225" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">BD</text>
+                    <text v-if="showCompass" x="270" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">B</text>
+                    <text v-if="showCompass" x="315" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">BL</text>
+                    <text v-if="showCompass" x="360" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">U</text>
+                    <text v-if="showCompass" x="405" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">TL</text>
+                    <text v-if="showCompass" x="450" y="1.5" dominant-baseline="middle" text-anchor="middle" fill="#fea403">T</text>
+                </svg>
             </div>
+        </div>
         <div id="openmenu">
             <div id="menu">
                 <q-splitter v-model="splitterModel" style="height: 50vh;">
@@ -63,7 +161,6 @@
                         <q-tab-panels v-model="tab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up" class="bg-active-tab">
                             <q-tab-panel name="hud">
                                 <div class="q-mb-md">
-                                    <div class="text-h6 q-mb-md">Reset Hud <img class="brand-logo" align="right" src="./brand-logo.svg"></img></div>
                                     <div class="q-pa-md q-gutter-sm">
                                         <q-btn v-on:click="resetStorage($event)" :loading="progress[0].loading" :percentage="progress[0].percentage" text-color="textbutton" color="bgbutton" @click="startComputing(0)" style="width: 150px"> Reset Settings
                                         <template v-slot:loading> <q-spinner-gears class="on-left"></q-spinner-gears> Resetting... </template></q-btn>
@@ -188,85 +285,78 @@
             </div>
         </div>
         <div id="main-container">
-            <div id="money-container">
-                <div id="money-cash">
-                    <transition name="slide-fade">
-                        <p v-if="showCash"><span id="sign">$&nbsp;</span><span id="money">{{(cash)}}</span></p>
-                    </transition>
-                </div>
-                <div id="money-bank">
-                    <transition name="slide-fade">
-                        <p v-if="showBank"><span id="sign">$&nbsp;</span><span id="bank">{{(bank)}}</span></p>
-                    </transition>
-                </div>
-                <div id="money-change" v-if="showUpdate">
-                    <p v-if="plus" id="money"><span id="plus">+&nbsp;</span><span id="money">{{(amount)}}</span></p>
-                    <p v-else-if="minus" id="minus"><span id="minus">-&nbsp;</span><span id="money">{{(amount)}}</span></p>
-                </div>
-            </div>
             <div id="ui-container">
                 <div id="playerHud" v-show="show">
                     <transition name="fade">
                     <div v-if="showVoice">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" :style="{color: talkingColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="voice" size="50px" :thickness="0.24" :style="{color: talkingColor}" :min="0" :max="5" center-color="grey-10">
-                        <q-icon style="top: -0.5px; left: 0px;" :name="voiceIcon" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: talkingColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="voice" size="50px" :thickness="0.15" :style="{color: talkingColor}" :min="0" :max="5">
+                        <q-avatar size="30px" :style="{backgroundColor: talkingColor + 66}">
+                        <q-icon style="top: 1px; left: -0.5px;" :name="voiceIcon" size="15px" color="{color: talkingColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showHealth">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" :style="{color: healthColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="health" size="50px" :thickness="0.24" :style="{color: healthColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon style="top: -0.5px; left: -0.4px;" name="fas fa-heart" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: healthColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="health" size="50px" :thickness="0.15" :style="{color: healthColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: healthColor + 66}">
+                        <q-icon style="top: -0.3px; left: -0.4px;" name="fas fa-heart" size="16px" color="{color: healthColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showArmor">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" :style="{color: armorColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="armor" size="50px" :thickness="0.24" :style="{color: armorColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon name="fas fa-shield-alt" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: armorColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="armor" size="50px" :thickness="0.15" :style="{color: armorColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: armorColor + 66}">
+                        <q-icon name="fas fa-shield-alt" size="16px" color="{color: armorColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showHunger">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" :style="{color: hungerColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="hunger" size="50px" :thickness="0.24" :style="{color: hungerColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon style="top: -1px; left: -0.5px;" name="fas fa-hamburger" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: hungerColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="hunger" size="50px" :thickness="0.15" :style="{color: hungerColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: hungerColor + 66}">
+                        <q-icon style="top: -0.3px; left: -0.5px;" name="fas fa-bowl-food" size="16px" color="{color: hungerColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showThirst">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" :style="{color: thirstColor}" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="thirst" size="50px" :thickness="0.24" :style="{color: thirstColor}" :min="0" :max="100" center-color="grey-10">
-                        <q-icon style="top: -0.5px; left: -0.5px;" name="fas fa-tint" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: thirstColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="thirst" size="50px" :thickness="0.15" :style="{color: thirstColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: thirstColor + 66}">
+                        <q-icon style="top: -0.3px; left: -0.5px;" name="fas fa-bottle-water" size="18px" color="{color: thirstColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showStress">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" color="stress" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="stress" size="50px" :thickness="0.24" color="stress" :min="0" :max="100" center-color="grey-10">
-                        <q-icon style="top: -0.5px; left: -0.5px;" name="fas fa-brain" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: stressColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="stress" size="50px" :thickness="0.15" :style="{color: stressColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: stressColor + 66}">
+                        <q-icon style="top: -0.3px; left: -0.5px;" name="fas fa-brain" size="16px" color="{color: stressColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showOxygen">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" color="oxygen" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="oxygen" size="50px" :thickness="0.24" color="oxygen" :min="0" :max="100" center-color="grey-10">
-                        <q-icon style="top: -2px; left: -0.1px;" name="fas fa-lungs" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: oxygenColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="oxygen" size="50px" :thickness="0.15" :style="{color: oxygenColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: oxygenColor + 66}">
+                        <q-icon style="top: -0.5px; left: -0.1px;" name="fas fa-lungs" size="16px" color="{color: oxygenColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showArmed">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" color="armed" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="static" size="50px" :thickness="0.24" color="armed" :min="0" :max="100" center-color="grey-10">
-                        <q-icon name="fas fa-stream" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: armedColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="static" size="50px" :thickness="0.15" :style="{color: armedColor}" :min="0" :max="100">
+                        <q-avatar size="30px" :style="{backgroundColor: armedColor + 66}">
+                        <q-icon name="fas fa-stream" size="15px" color="{color: armedColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
                     <div v-if="showParachute">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" color="parachute" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="parachute" size="50px" :thickness="0.24" color="parachute" :min="0" :max="2" center-color="grey-10">
-                        <q-icon name="fas fa-parachute-box" size="23px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" :style="{color: parachuteColor}" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="parachute" size="50px" :thickness="0.15" :style="{color: parachuteColor}" :min="0" :max="2">
+                        <q-avatar size="30px" :style="{backgroundColor: parachuteColor + 66}">
+                        <q-icon name="fas fa-parachute-box" size="23px" color="{color: parachuteColor}"/>
                     </div>
                     </transition>
                     <transition name="fade">
@@ -299,9 +389,9 @@
                     </transition>
                     <transition name="fade">
                     <div v-if="showDev">
-                        <q-circular-progress class="q-ml-xl" style="opacity: 40%;" :value="static" size="50px" :thickness="0.24" color="dev" :min="0" :max="100"></q-circular-progress>
-                        <q-circular-progress class="q-ml-xl" style="left: -50%;" show-value :value="static" size="50px" :thickness="0.24" color="dev" :min="0" :max="100" center-color="grey-10">
-                        <q-icon name="fas fa-terminal" size="19.5px" color="white"/>
+                        <q-circular-progress style="opacity: 40%; margin-left: -15px;" :value="static" size="50px" :thickness="0.15" color="dev" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress style="left: -50%; margin-left: -15px;" show-value :value="static" size="50px" :thickness="0.15" color="dev" :min="0" :max="100">
+                        <q-icon name="fas fa-terminal" size="15px" color="dev"/>
                     </div>
                     </transition>
                 </div>
@@ -312,6 +402,11 @@
                         <q-circular-progress class="q-ml-xl" style="transform: rotate(-150deg); opacity: 60%;" :value="speedometer" size="70px" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>
                         <q-circular-progress class="q-ml-xl" style="transform: rotate(-150deg); left: -50%;" show-value :value="speed" size="70px" :thickness="0.21" color="gauge" :min="0" :max="600">
                         <speed>{{(speed)}}</speed>
+                    </div>
+                    <div class="responsive" id="rpm">
+                        <q-circular-progress class="q-ml-xl" style="transform: rotate(-150deg); opacity: 60%;" :value="rpm" size="70px" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>
+                        <q-circular-progress class="q-ml-xl" style="transform: rotate(-150deg); left: -50%;" show-value :value="rpm" size="70px" :thickness="0.21" color="gauge" :min="0" :max="600">
+                        <rpm>{{(rpm)}}</rpm>
                     </div>
                     <div class="responsive" id="fuelgauge">
                         <q-circular-progress class="q-ml-xl" style="transform: rotate(-125deg); opacity: 60%;" :value="fuelgauge" size="36px" :thickness="0.21" color="gauge" :min="0" :max="100"></q-circular-progress>

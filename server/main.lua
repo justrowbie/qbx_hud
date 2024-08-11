@@ -76,7 +76,7 @@ lib.addCommand(locale('commands.cash'), {
 }, function(source)
     local player = exports.qbx_core:GetPlayer(source)
     local cashAmount = player.PlayerData.money.cash
-    TriggerClientEvent('hud:client:ShowAccounts', source, 'cash', cashAmount)
+    exports.qbx_core:Notify(source, 'Cash', 'inform', 7500, '$'..cashAmount)
 end)
 
 lib.addCommand(locale('commands.bank'), {
@@ -84,7 +84,7 @@ lib.addCommand(locale('commands.bank'), {
 }, function(source)
     local player = exports.qbx_core:GetPlayer(source)
     local bankAmount = player.PlayerData.money.bank
-    TriggerClientEvent('hud:client:ShowAccounts', source, 'bank', bankAmount)
+    exports.qbx_core:Notify(source, 'Bank', 'inform', 7500, '$'..bankAmount)
 end)
 
 lib.addCommand('dev', {
